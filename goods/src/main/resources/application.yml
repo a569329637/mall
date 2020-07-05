@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: mall-goods-server
+server:
+  port: 8764
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
