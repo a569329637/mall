@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Table(name = "t_order")
 @Entity
@@ -15,13 +16,47 @@ import java.math.BigDecimal;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long orderId;
+    @Column
+    private Long userId;
+    @Column
+    private Integer status;
+
+    @Column
+    private Integer LogisticsStatus;
+    @Column
+    private String LogisticsNumber;
+
+    @Column
+    private Long userAddressId;
     @Column
     private String username;
     @Column
-    private String name;
+    private String userMobile;
     @Column
-    private Integer age;
+    private String userCountry;
     @Column
-    private BigDecimal balance;
+    private String userProvince;
+    @Column
+    private String userCity;
+    @Column
+    private String userAddressDetail;
+
+    @Column
+    private Long goodsId;
+    @Column
+    private String goodsTitle;
+    @Column
+    private String goodsDescription;
+    @Column
+    private BigDecimal goodsPrice;
+    @Column
+    private Integer goodsCount;
+
+    @Column
+    private Integer deleted;
+    @Column
+    private Date createTime;
+    @Column
+    private Date updateTime;
 }

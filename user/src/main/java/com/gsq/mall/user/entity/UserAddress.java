@@ -1,34 +1,37 @@
-package com.gsq.mall.goods.entity;
+package com.gsq.mall.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
-@Table(name = "t_goods")
+@Table(name = "t_user_address")
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Goods {
+public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long goodsId;
+    private Long userAddressId;
     @Column
-    private String title;
+    private Long userId;
     @Column
-    private String description;
+    private String userName;
     @Column
-    private String pictureUrl;
+    private String mobile;
     @Column
-    private Integer isOnSale;
+    private String country;
     @Column
-    private BigDecimal price;
+    private String province;
     @Column
-    private Integer count;
+    private String city;
+    @Column
+    private String detail;
+    @Column
+    private Integer isDefault;
     @Column
     private Integer deleted;
     @Column

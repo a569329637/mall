@@ -1,24 +1,28 @@
 package com.gsq.mall.goods.controller;
 
+import com.gsq.mall.goods.core.ResponseData;
 import com.gsq.mall.goods.entity.Goods;
-import com.gsq.mall.goods.repository.GoodsRepository;
+import com.gsq.mall.goods.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/goods")
 @RestController
 public class GoodsController {
 
     @Autowired
-    private GoodsRepository goodsRepository;
+    private GoodsService goodsService;
 
     @GetMapping("/{id}")
-    public Optional<Goods> findById(@PathVariable Long id) {
-        return this.goodsRepository.findById(id);
+    public ResponseData<Goods> findById(@PathVariable Long id) {
+        Goods goods = goodsService.findById(id);
+        return new ResponseData<>(goods);
+    }
+
+    @PostMapping("/{id}/update_stock")
+    public ResponseData updateStock(@PathVariable Long id,
+                                    @RequestParam Integer count) {
+        goodsService.updateStock(id, count);
+        return new ResponseData<>();
     }
 }
