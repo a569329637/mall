@@ -1,4 +1,4 @@
-//package com.gsq.user;
+//package com.gsq.mall.user;
 //
 //import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;

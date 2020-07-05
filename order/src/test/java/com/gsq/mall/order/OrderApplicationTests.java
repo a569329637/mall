@@ -1,10 +1,10 @@
-//package com.gsq.goods;
+//package com.gsq.mall.order;
 //
 //import org.junit.jupiter.api.Test;
 //import org.springframework.boot.test.context.SpringBootTest;
 //
 //@SpringBootTest
-//class GoodsApplicationTests {
+//class OrderApplicationTests {
 //
 //    @Test
 //    void contextLoads() {

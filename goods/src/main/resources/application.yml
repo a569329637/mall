@@ -1,8 +1,12 @@
 spring:
   application:
     name: mall-goods-server
+  jpa:
+    show-sql: true
+
 server:
   port: 8764
+
 eureka:
   client:
     service-url:
@@ -10,3 +14,9 @@ eureka:
   instance:
     prefer-ip-address: true
 
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
