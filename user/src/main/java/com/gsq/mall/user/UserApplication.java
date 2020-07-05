@@ -12,11 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class UserApplication {
@@ -35,7 +32,7 @@ public class UserApplication {
                 String password = RandomStringUtils.randomAlphanumeric(10);
                 String salt = RandomStringUtils.randomAlphanumeric(10);
                 String email = RandomStringUtils.randomAlphanumeric(10) + "@gmail.com";
-                User user = new User(idx, username, password, password, salt, email,
+                User user = new User(idx, username, password, nickname, salt, email,
                         UserStatusEnum.NORMAL.getStatus(), new Date(), new Date());
                 repository.save(user);
             });

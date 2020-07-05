@@ -1,21 +1,12 @@
 package com.gsq.mall.order.controller;
 
-import com.gsq.mall.goods.entity.Goods;
 import com.gsq.mall.order.controller.params.CreateOrderParams;
 import com.gsq.mall.order.core.ResponseData;
 import com.gsq.mall.order.entity.Order;
-import com.gsq.mall.order.feign.GoodsFeignClient;
-import com.gsq.mall.order.feign.UserAddressFeignClient;
-import com.gsq.mall.order.feign.UserFeignClient;
-import com.gsq.mall.order.repository.OrderRepository;
 import com.gsq.mall.order.service.OrderService;
-import com.gsq.mall.user.entity.User;
-import com.gsq.mall.user.entity.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RequestMapping("/orders")
 @RestController
