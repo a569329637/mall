@@ -22,10 +22,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -40,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserAddressFeignClient userAddressFeignClient;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
     public Order createOrder(CreateOrderParams params) {
         ResponseData<User> userData = userFeignClient.findById(params.getUserId());
@@ -58,12 +60,10 @@ public class OrderServiceImpl implements OrderService {
         if (goods == null) {
             throw new AppException(ResultEnum.GOODS_NOT_FOUND);
         }
-
-        // judge goods count
+        // check goods stock
         if (goods.getCount() < params.getGoodsCount()) {
             throw new AppException(ResultEnum.GOODS_COUNT_NOT_ENOUGH);
         }
-        goodsFeignClient.updateStock(params.getGoodsId(), params.getGoodsCount());
 
         Order order = new Order();
         order.setUserId(user.getUserId());
@@ -88,7 +88,13 @@ public class OrderServiceImpl implements OrderService {
         order.setGoodsDescription(goods.getDescription());
         order.setGoodsPrice(BigDecimal.valueOf(params.getGoodsCount()).multiply(goods.getPrice()));
         order.setGoodsCount(params.getGoodsCount());
-        return orderRepository.save(order);
+        order = orderRepository.save(order);
+
+        ResponseData responseData = goodsFeignClient.updateStock(params.getGoodsId(), params.getGoodsCount());
+        if (!Objects.equals(responseData.getCode(), ResultEnum.SUCCESS.getCode())) {
+            throw new AppException(ResultEnum.GOODS_COUNT_NOT_ENOUGH);
+        }
+        return order;
     }
 
     @Override
