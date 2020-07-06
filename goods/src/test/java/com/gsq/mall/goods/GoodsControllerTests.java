@@ -45,13 +45,9 @@ public class GoodsControllerTests {
         Assert.assertNull(goods);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testUpdateStockFail() {
-        try {
-            ResponseData<Goods> goodsData = goodsController.updateStock(1L, 100);
-        } catch (RuntimeException e) {
-            Assert.assertEquals("goods not found or goods count not enough", e.getMessage());
-        }
+        goodsController.updateStock(1L, 1000);
     }
 
 }

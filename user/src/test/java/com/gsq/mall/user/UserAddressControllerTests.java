@@ -23,7 +23,7 @@ public class UserAddressControllerTests {
         Assert.assertNotNull(userAddressData);
 
         UserAddress userAddress = userAddressData.getData();
-        System.out.println("userAddress = " + userAddress);
+        //System.out.println("userAddress = " + userAddress);
         Assert.assertEquals(6L, userAddress.getUserAddressId().longValue());
         Assert.assertEquals(1L, userAddress.getUserId().longValue());
         Assert.assertEquals("guishangquan6", userAddress.getUserName());

@@ -30,9 +30,9 @@ public class GoodsApplication {
                 String description = "description";
                 String pictureUrl = "http://localhost:8764/goods/1";
                 BigDecimal price = new BigDecimal("100.00");
-                Integer number = 10;
+                Integer count = 10;
                 Goods goods = new Goods(idx, title, description, pictureUrl, OnSaleEnum.YES.getStatus(),
-                        price, number, DeletedEnum.NO.getStatus(), new Date(), new Date());
+                        price, count, DeletedEnum.NO.getStatus(), new Date(), new Date());
                 repository.save(goods);
             });
         };
